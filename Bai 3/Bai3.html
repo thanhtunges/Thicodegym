@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bai 3</title>
+</head>
+<body>
+<script>
+    function isPrime(num) {
+        if (num <= 1) return false;
+        if (num <= 3) return true;
+        if (num % 2 === 0 || num % 3 === 0) return false;
+        for (let i = 5; i * i <= num; i += 6) {
+            if (num % i === 0 || num % (i + 2) === 0) return false;
+        }
+        return true;
+    }
+
+    function findPrimes(arr) {
+        return arr.filter(isPrime).sort((a, b) => a - b);
+    }
+
+    // Yêu cầu người dùng nhập số, phân tách bởi dấu phẩy
+    let userInput = prompt("Nhập các số nguyên, phân tách bởi dấu phẩy (ví dụ: 2,3,4,5,6):");
+
+    if (userInput !== null) {
+        // Chuyển đổi chuỗi nhập vào thành mảng số nguyên
+        let numberArray = userInput.split(',')
+            .map(num => parseInt(num.trim()))
+            .filter(num => !isNaN(num));
+
+        // Tìm các số nguyên tố và sắp xếp chúng
+        let primesArray = findPrimes(numberArray);
+
+        // Hiển thị kết quả
+        document.write(`<p>Mảng số nguyên: [${numberArray.join(', ')}]</p>`);
+        document.write(`<p>Các số nguyên tố đã sắp xếp: [${primesArray.join(', ')}]</p>`);
+    } else {
+        document.write("<p>Không có chuỗi nhập vào.</p>");
+    }
+</script>
+</body>
+</html>
